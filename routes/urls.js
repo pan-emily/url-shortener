@@ -13,7 +13,7 @@ router.post('/short', async (req, res) => {
     const base = process.env.BASE;
 
     const urlId = nanoid();
-    if (utils.validateUrl(originalUrl)) {
+    if (validateUrl(originalUrl)) {
         try {
             let url = await Url.findOne({originalUrl});
             if (url) {
@@ -21,7 +21,7 @@ router.post('/short', async (req, res) => {
             } else {
                 const shortUrl = `${base}/${urlId}`;
 
-                url = newUrl({
+                url = new Url({
                     originalUrl, 
                     shortUrl, 
                     urlId, 
